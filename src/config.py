@@ -4,6 +4,7 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 RAW_DIR = ROOT_DIR / "data" / "raw"
 PROCESSED_DIR = ROOT_DIR / "data" / "processed"
 RESULTS_DIR = ROOT_DIR / "results"
+SNAPSHOT_DATE = "2026-11-27"
 
 SEED = 42   # Use this seed to make random operations reproducible.
 
