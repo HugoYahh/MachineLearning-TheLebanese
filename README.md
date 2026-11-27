@@ -39,7 +39,7 @@ pip install -r requirements.txt
 | FRED `VIXCLS` | VIX index |
 | FRED `T10Y2Y` | 10Y minus 2Y Treasury spread |
 
-- **Snapshot date:** TODO
+- **Snapshot date:** 2026-11-27
 - **Download period:** TODO
 - **Stock universe and selection criteria:** TODO
 - **Final size (rows, columns, tickers):** TODO
@@ -48,13 +48,24 @@ pip install -r requirements.txt
 
 | Issue found | Number of cases | Treatment | Justification |
 |---|---|---|---|
-| TODO | | | |
+| Duplicates, missing values, missing stock-days | 0 | None | Missing days are checked against the dates observed across all stocks |
+| Non-positive prices, negative or zero volumes | 0 | None | No issue detected |
+| Incoherent high/low prices | 0 | None | Relative tolerance of 1e-6 |
+| Daily moves above 25% | 14 | Kept | No correction without evidence of a data error; most occur in early 2009 |
+| Missing T10Y2Y on trading days | 32 | Forward-fill | Uses earlier observations only |
+| Missing VIX on trading days | 0 | None | No issue detected |
 
 ## 5. Features and Target
 
 | Feature | Definition |
 |---|---|
-| TODO | |
+| `ret_1d`, `ret_5d`, `ret_22d` | close(t) / close(t-n) - 1 |
+| `park_vol_5d`, `park_vol_22d` | Square root of the n-day mean of ln(high/low)² / (4 ln 2), daily scale |
+| `dist_high_252d` | close(t) / highest close over the last 252 days (t included) - 1 |
+| `volume_ratio_20d` | volume(t) / mean volume over the last 20 days (t included) |
+| `vix` | VIX value dated t, forward-filled if missing |
+| `vix_chg_5d` | vix(t) - vix(t-5), in points |
+| `t10y2y` | 10Y-2Y Treasury spread dated t, forward-filled if missing |
 
 **Target:** TODO
 
