@@ -11,11 +11,13 @@ Machine Learning Project, ESILV A4 Financial Engineering, 2026-2027.
 
 ## 1. How to Run
 
-Python version: `TODO`
+Python version: 3.14.8
 
 ```bash
 pip install -r requirements.txt
-# TODO: add the commands, in execution order
+python3 -m src.data_cleaning
+python3 -m src.features
+python3 -m pytest
 ```
 
 ## 2. Repository Structure
@@ -67,7 +69,8 @@ pip install -r requirements.txt
 | `vix_chg_5d` | vix(t) - vix(t-5), in points |
 | `t10y2y` | 10Y-2Y Treasury spread dated t, forward-filled if missing |
 
-**Target:** TODO
+**Target:** y = 1 if the lowest close from t+1 to t+5 is at most (1 - X) × close(t), else y = 0. Rows without 5 future trading days are removed. X is selected using the training set only.
+
 
 ## 6. Exploratory Data Analysis (training set only)
 
@@ -82,12 +85,12 @@ pip install -r requirements.txt
 
 | Set | Period | Rows | Positive rate | Role |
 |---|---|---|---|---|
-| Train | 2010-2018 | TODO | TODO | Fit models |
-| Validation | 2019-2021 | TODO | TODO | Tuning and threshold choice |
-| Test | 2022-2025 | not reported yet | not reported yet | Final evaluation, used once |
+| Train | 2010-01-04 to 2018-12-21 | 90,360 | TODO | Fit models |
+| Validation | 2019-01-02 to 2021-12-23 | 30,080 | TODO | Tuning and threshold choice |
+| Test | 2022-01-03 to 2025-12-23 | 39,920 | not reported yet | Final evaluation, used once |
 
-- **Embargo:** TODO
-- **Walk-forward folds:** TODO
+- **Embargo:** The last 5 trading dates of the train and validation sets are removed, because their labels use prices from the next period.
+- **Walk-forward folds:** 4 expanding-window folds inside the training set, each validated on one year (2015 to 2018), with a 5-trading-day embargo.
 - **Preprocessing fitted on training data only:** TODO
 - **Leakage tests:** TODO
 
