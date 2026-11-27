@@ -74,12 +74,12 @@ python3 -m pytest
 
 ## 6. Exploratory Data Analysis (training set only)
 
-- **Class distribution for each candidate X:** TODO
-- **Prevalence over time and across tickers:** TODO
-- **Missing values:** TODO
-- **Outliers:** TODO
-- **Correlations and VIF:** TODO
-- **Chosen threshold X and justification:** TODO
+- **Class distribution for each candidate X:** On the training set, a 5% threshold yielded 5,332 positive observations out of 90,360 (5.90%), compared with 2,165 (2.40%) at 7%.
+- **Prevalence over time and across tickers:** In 2017, the year with the fewest positives, the 5% threshold yielded 220 positives compared with 57 at 7%. For Coca-Cola (KO), the counts were 36 and 4, respectively.
+- **Missing values:** None of the ten features had missing values in the 90,360 training observations.
+- **Outliers:** Using the 1.5 × IQR rule, 7.39% of observations were flagged for the five-day VIX change, 5.55% for the one-day return, and 5.49% for the VIX level. No observations were flagged for the 10Y–2Y Treasury spread. All flagged values were retained at this stage.
+- **Correlations and VIF:** The strongest pairwise correlation was between the 5-day and 22-day Parkinson volatility estimates (0.81). Their VIFs were 3.56 and 4.16, respectively. All VIFs were below 5, so we retained all ten features for the initial logistic regression baseline.
+- **Chosen threshold X and justification:** We selected X = 5% using only the 2010–2018 training set. It provided about 2.5 times as many positive observations as the 7% threshold while keeping the positive class rare (5.90%).
 
 ## 7. Data Split and Leakage Control
 
