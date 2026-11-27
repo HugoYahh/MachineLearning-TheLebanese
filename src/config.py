@@ -66,7 +66,7 @@ TEST_START, TEST_END = "2022-01-01", "2025-12-31"
 HORIZON = 5                    # Number of future trading sessions used to build the target.
 EMBARGO = 5                    # Drop the last five trading sessions from train and validation so labels stay within each split.
 DRAWDOWN_THRESHOLD = None      # Choose the drop threshold (5% or 7%) using only the training set.
-N_FOLDS = None                 # Number of walk-forward splits within the training set, to be decided.
+N_FOLDS = 4                 # Number of walk-forward splits within the training set, to be decided.
 
 # Dataset schema 
 # Columns expected in the dataset. Each row represents one stock on one trading day.
