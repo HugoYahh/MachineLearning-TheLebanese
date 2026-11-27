@@ -65,7 +65,7 @@ TEST_START, TEST_END = "2022-01-01", "2025-12-31"
 # Target and split 
 HORIZON = 5                    # Number of future trading sessions used to build the target.
 EMBARGO = 5                    # Drop the last five trading sessions from train and validation so labels stay within each split.
-DRAWDOWN_THRESHOLD = None      # Choose the drop threshold (5% or 7%) using only the training set.
+DRAWDOWN_THRESHOLD = 0.05      # Choose the drop threshold (5% or 7%) using only the training set. Finally, we chose 5% because it is more common and allows for more training data.
 N_FOLDS = 4                 # Number of walk-forward splits within the training set, to be decided.
 
 # Dataset schema 
@@ -73,7 +73,7 @@ N_FOLDS = 4                 # Number of walk-forward splits within the training 
 ID_COLS = ["date", "ticker", "sector"]
 FEATURE_COLS = ["ret_1d", "ret_5d", "ret_22d","park_vol_5d", "park_vol_22d","dist_high_252d", "volume_ratio_20d","vix", "vix_chg_5d", "t10y2y",]
 TARGET_COL = "y"
-B2_FEATURES = None             # Select after training-set EDA
+B2_FEATURES = FEATURE_COLS.copy()            # Select after training-set EDA
 
 # --- Evaluation ---
 # Set the target precision to twice the prevalence in the training set.
